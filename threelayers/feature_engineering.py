@@ -1,5 +1,6 @@
 import pandas as pd
 
+# NOT TESTED
 def polynomialFeatures(train: pd.DataFrame, test: pd.DataFrame, cols: list, degree: int = 2):
     from sklearn.preprocessing import PolynomialFeatures
 
@@ -10,6 +11,7 @@ def polynomialFeatures(train: pd.DataFrame, test: pd.DataFrame, cols: list, degr
     test = pd.concat([test, test_nw_df.drop(cols, axis=1)], axis=1)
     return train, test
 
+# NOT TESTED
 def winsorization(df: pd.DataFrame, cols: list, quantile: float = .05):
     from scipy import stats
     

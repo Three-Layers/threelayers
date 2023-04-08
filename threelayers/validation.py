@@ -4,7 +4,6 @@ from cleaning import conf_dtype
 
 # NOT TESTED
 def validate_FE_train_test(train: pd.DataFrame, test: pd.DataFrame, target: str):
-    
     # assert time == [] and cat == []
     _, _, (time, continu, discrete, cat) = conf_dtype(train, test, True)
     if time != []:

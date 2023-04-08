@@ -4,15 +4,15 @@ with open("readme.md", "r") as f:
     long_description = f.read()
 
 setup(
-    name="xenozu",
+    name="threelayers",
     version="0.0.1",
     description="Data science library built through competition experience",
-    package_dir={"": "xenozu"},
-    packages=find_packages(where="xenozu"),
+    package_dir={"": "threelayers"},
+    packages=find_packages(where="threelayers"),
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="",
-    author="Eryaw",
+    author="threelayers",
     author_email="zazaneryawan@gmail.com",
     license="MIT",
     classifiers=[

@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: threelayers
+Version: 0.0.1
+Summary: Data science library built through competition experience
+Home-page: 
+Author: threelayers
+Author-email: zazaneryawan@gmail.com
+License: MIT
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+License-File: LICENSE
+
+## Source Code Format
+Each submodule only has **1** (or simillar) API calls.
+- feature_engineering
+func(train:pd.DataFrame, test:pd.DataFrame) -> (train:pd.DataFrame, test:pd.DataFrame)
+- visualize
+
+## Plan
+- Short Term
+    - Add model API
+    - Add EDA template
+    - Add Statistics template
+    - Add auto EDA
+    - Add auto Statistics
+- Long Term
+    - TODO: Integrate with kaggle API
+    - TODO: 
