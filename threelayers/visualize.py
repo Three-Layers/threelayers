@@ -1,8 +1,10 @@
+import time
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import scipy.stats as stats
+from IPython import display as ipythondisplay
 
 # NOT TESTED
 def unique_df(df:pd.DataFrame, test:pd.DataFrame, with_continue_vars:bool=True):
@@ -99,6 +101,7 @@ def compare_transform_to_normal(df: pd.DataFrame, col: str, func=[np.log]):
         plt.title("")
         plt.xlabel("")
     plt.tight_layout()
+
 # NOT TESTED
 def show_correlation_to_variable(df: pd.DataFrame, col:str):
     """
@@ -110,6 +113,7 @@ def show_correlation_to_variable(df: pd.DataFrame, col:str):
         _df.loc['Value', col] = corr_series[col]
     sorted_index = _df.loc['Value', :].sort_values(ascending=False).index
     return _df[sorted_index].style.background_gradient(sns.diverging_palette(20, 145, n=10, center='dark', as_cmap=True), vmin=-1, vmax=1, subset=sorted_index)
+
 # NOT TESTED
 def plot_tf_hist(hist, test_score:int = None):
     fig = plt.figure(figsize=(20, 7))
@@ -135,3 +139,56 @@ def plot_tf_hist(hist, test_score:int = None):
         plt.legend()
 
         _counter += 2
+
+
+# snippet link: https://github.com/aamini/introtodeeplearning/blob/master/mitdeeplearning/util.py
+class PeriodicPlotter:
+  """A utility class for creating periodic plots of data.
+
+  Args:
+    sec (float): The number of seconds between plot updates.
+    xlabel (str): The label for the x-axis of the plot.
+    ylabel (str): The label for the y-axis of the plot.
+    scale (str, optional): The type of scale to use for the plot (one of
+      'semilogx', 'semilogy', 'loglog', or None).
+
+  Attributes:
+    xlabel (str): The label for the x-axis of the plot.
+    ylabel (str): The label for the y-axis of the plot.
+    sec (float): The number of seconds between plot updates.
+    scale (str or None): The type of scale to use for the plot.
+    tic (float): The time of the last plot update.
+
+  Methods:
+    plot(data): Update the plot with new data, if enough time has elapsed.
+  """
+
+  def __init__(self, sec, xlabel='', ylabel='', scale=None):
+
+    self.xlabel = xlabel
+    self.ylabel = ylabel
+    self.sec = sec
+    self.scale = scale
+
+    self.tic = time.time()
+
+  def plot(self, data):
+    if time.time() - self.tic > self.sec:
+      plt.cla()
+
+      if self.scale is None:
+        plt.plot(data)
+      elif self.scale == 'semilogx':
+        plt.semilogx(data)
+      elif self.scale == 'semilogy':
+        plt.semilogy(data)
+      elif self.scale == 'loglog':
+        plt.loglog(data)
+      else:
+        raise ValueError("unrecognized parameter scale {}".format(self.scale))
+
+      plt.xlabel(self.xlabel); plt.ylabel(self.ylabel)
+      ipythondisplay.clear_output(wait=True)
+      ipythondisplay.display(plt.gcf())
+
+      self.tic = time.time()
